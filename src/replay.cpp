@@ -60,6 +60,9 @@ void get_replay_descriptor(struct replay *r, char *buffer, size_t bufferLength)
         case MODE_G2_DEATH:
             strncpy(modeStringBuffer, "G2 DEATH", REPLAY_DESCRIPTOR_BUF_SIZE);
             break;
+        case MODE_G2_NIGHTMARE:
+            strncpy(modeStringBuffer, "G2 NIGHTMARE", REPLAY_DESCRIPTOR_BUF_SIZE);
+            break;
         case MODE_G3_TERROR:
             strncpy(modeStringBuffer, "G3 TERROR", REPLAY_DESCRIPTOR_BUF_SIZE);
             break;

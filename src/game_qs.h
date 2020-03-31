@@ -23,12 +23,13 @@
 // #define SIMULATE_G3    0x0040
 
 // mode IDs
-#define QRS_PRACTICE   0x0080
-#define MODE_G2_DEATH  0x0100
-#define MODE_G3_TERROR 0x0200
-#define MODE_G1_MASTER 0x0400
-#define MODE_G1_20G    0x0800
-#define MODE_G2_MASTER 0x1000
+#define QRS_PRACTICE      0x0080
+#define MODE_G2_DEATH     0x0100
+#define MODE_G3_TERROR    0x0200
+#define MODE_G1_MASTER    0x0400
+#define MODE_G1_20G       0x0800
+#define MODE_G2_MASTER    0x1000
+#define MODE_G2_NIGHTMARE 0x2000
 // should add "variation" codes that change mode behavior (unique code interpretations for each mode maybe)
 
 #define RANDOMIZER_NORMAL 0

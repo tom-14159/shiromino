@@ -753,6 +753,7 @@ int gfx_drawqrsfield(coreState *cs, grid_t *field, unsigned int mode, unsigned i
             break;
 
         case MODE_G2_DEATH:
+        case MODE_G2_NIGHTMARE:
             tetrion_qs = cs->assets->g2_tetrion_g2_death.tex;
             break;
 
@@ -805,7 +806,6 @@ int gfx_drawqrsfield(coreState *cs, grid_t *field, unsigned int mode, unsigned i
                 dest.y = (j-2)*16;
                 SDL_RenderFillRect(cs->screen.renderer, &dest);
             }*/
-
             if(c != -2 && c)
             {
                 if(c == -5)

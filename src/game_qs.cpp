@@ -468,6 +468,7 @@ static void update_music(qrsdata *q, coreState *cs)
             break;
 
         case MODE_G2_DEATH:
+        case MODE_G2_NIGHTMARE:
             play_or_halt_music(q, cs, &cs->assets->g2_track0, find_music(q->level, g2_death_music));
             break;
 
@@ -625,6 +626,16 @@ game_t *qs_game_create(coreState *cs, int level, unsigned int flags, int replay_
         q->grade = NO_GRADE;
         // q->field_x = QRS_FIELD_X - 28;
         // q->field_y = QRS_FIELD_Y - 16 + 2;
+        q->lock_protect = 1;
+        flags |= SIMULATE_G2;
+        flags |= TETROMINO_ONLY;
+        flags &= ~SIMULATE_G1;
+        flags &= ~SIMULATE_G3;
+    }
+    else if(flags & MODE_G2_NIGHTMARE)
+    {
+        q->mode_type = MODE_G2_NIGHTMARE;
+        q->grade = NO_GRADE;
         q->lock_protect = 1;
         flags |= SIMULATE_G2;
         flags |= TETROMINO_ONLY;
@@ -1254,6 +1265,7 @@ int qs_game_frame(game_t *g)
                 break;
 
             case MODE_G2_DEATH:
+            case MODE_G2_NIGHTMARE:
                 while(q->speed_curve_index < G2_DEATH_CURVE_MAX && g2_death_curve[q->speed_curve_index].level <= q->level)
                 {
                     q->p1->speeds = &g2_death_curve[q->speed_curve_index];
@@ -1366,6 +1378,7 @@ int qs_game_frame(game_t *g)
                 case MODE_G1_MASTER:
                 case MODE_G1_20G:
                 case MODE_G2_DEATH:
+                case MODE_G2_NIGHTMARE:
                 case MODE_G3_TERROR:
                 case MODE_PENTOMINO:
                     q->state_flags &= ~GAMESTATE_CREDITS;
@@ -1595,6 +1608,7 @@ static int qs_are_expired(game_t *g)
         switch(q->mode_type)
         {
             case MODE_G2_DEATH:
+            case MODE_G2_NIGHTMARE:
             case MODE_G1_20G:
             case MODE_G1_MASTER:
             case MODE_G2_MASTER:
@@ -2003,6 +2017,7 @@ int qs_process_lockflash(game_t *g)
                         break;
 
                     case MODE_G2_DEATH:
+                    case MODE_G2_NIGHTMARE:
                         q->score += (q->level / 4 + q->soft_drop_counter + 2 * q->sonic_drop_height) * n * q->combo * (bravo ? 4 : 1) + q->level / 2 +
                                     7 * q->placement_speed;
                         break;
@@ -2302,6 +2317,7 @@ int qs_process_lockflash(game_t *g)
                             break;
 
                         case MODE_G2_DEATH:
+                        case MODE_G2_NIGHTMARE:
                             if(q->section == 5)
                             {
                                 if(q->timer->time > G2_DEATH_TORIKAN)
@@ -2448,6 +2464,7 @@ int qs_process_lockflash(game_t *g)
                         break;
 
                     case MODE_G2_DEATH:
+                    case MODE_G2_NIGHTMARE:
                         q->grade = GRADE_GM;
                         q->last_gradeup_timestamp = g->frame_counter;
                         sfx_play(&cs->assets->gradeup);

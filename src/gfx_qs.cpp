@@ -64,7 +64,7 @@ int gfx_drawqs(game_t *g)
             drawpiece_next1_flags |= DRAWPIECE_IPREVIEW;
     }
 
-    unsigned int drawqrsfield_flags = 0;
+    unsigned int drawqrsfield_flags = q->mode_type == MODE_G2_NIGHTMARE ? DRAWFIELD_INVISIBLE : 0;
     unsigned int drawpiece_flags = /*q->mode_type == MODE_G2_DEATH ? GFX_G2 : */ 0;
 
     SDL_Texture *font = cs->assets->font.tex;
